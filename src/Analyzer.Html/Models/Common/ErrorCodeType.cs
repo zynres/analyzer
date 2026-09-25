@@ -1,0 +1,20 @@
+namespace Analyzer.Html.Models.Common;
+
+public enum ErrorCodeType : byte
+{
+    NONE,
+    
+    EMPTY_SELECTOR,
+    EMPTY_ATTRIBUTE,
+    EMPTY_URL_B64,
+    EMPTY_ENCRYPTED_TEXT_B64,
+    EMPTY_KEY_BYTES_B64,
+    EMPTY_PAGE_B64,
+    
+    MISSING_ALL_PARAMETRS,
+    
+    INVALID_DECODE_URL_B64,
+    INVALID_DECODE_ENCRYPTED_TEXT_B64,
+    INVALID_DECODE_KEY_BYTES_B64,
+    INVALID_DECODE_PAGE_B64
+}
