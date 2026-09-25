@@ -13,6 +13,8 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+      <PackageReference Include="FluentValidation" Version="12.1.1" />
       <PackageReference Include="AngleSharp" Version="1.8.2" />
   </ItemGroup>
 

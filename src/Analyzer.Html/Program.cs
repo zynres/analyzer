@@ -1,4 +1,6 @@
 using Analyzer.Html.Services.Context;
+using Analyzer.Html.Services.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 public class Program
@@ -9,6 +11,8 @@ public class Program
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddValidatorsFromAssemblyContaining<PostElementRequestValidator>();
 
         builder.Services.AddControllers();
 
@@ -35,7 +39,7 @@ public class Program
         {
             app.UseHttpsRedirection();
         }
-        
+
         app.MapControllers();
 
         app.Run();
