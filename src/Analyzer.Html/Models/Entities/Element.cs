@@ -1,4 +1,4 @@
-namespace Analyzer.Html.Models;
+namespace Analyzer.Html.Models.Entities;
 
 public class Element
 {
