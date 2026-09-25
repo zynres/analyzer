@@ -1,7 +1,5 @@
-using Analyzer.Html.Services.Context;
 using Analyzer.Html.Services.Validators;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 
 public class Program
 {
@@ -16,9 +14,6 @@ public class Program
 
         builder.Services.AddControllers();
 
-        builder.Services.AddDbContext<DataBaseContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("Db")));
-
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
@@ -29,11 +24,6 @@ public class Program
                 setup.RoutePrefix = "api/swagger";
                 setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Analyzer");
             });
-
-            using var scope = app.Services.CreateScope();
-
-            var context = scope.ServiceProvider.GetRequiredService<DataBaseContext>();
-            context.Database.Migrate();
         }
         else
         {

@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.1.89" />
+      <PackageReference Include="Npgsql" Version="10.0.3" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
       <PackageReference Include="FluentValidation" Version="12.1.1" />
       <PackageReference Include="AngleSharp" Version="1.8.2" />
