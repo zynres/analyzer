@@ -1,3 +1,4 @@
+using Analyzer.Html.Services;
 using Analyzer.Html.Services.Validators;
 using FluentValidation;
 
@@ -24,6 +25,8 @@ public class Program
                 setup.RoutePrefix = "api/swagger";
                 setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Analyzer");
             });
+
+            DbInitializer.Initialize(app.Configuration);
         }
         else
         {
