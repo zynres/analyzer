@@ -1,6 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
@@ -8,9 +9,14 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.MapSwagger();
+    app.MapSwaggerUI(setupAction: setup =>
+    {
+        setup.RoutePrefix = "api/swagger";
+        setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Analyzer V1");
+    });
 }
-else 
+else
 {
     app.UseHttpsRedirection();
 }
