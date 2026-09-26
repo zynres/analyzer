@@ -30,8 +30,25 @@ services:
       retries: 5
     volumes:
       - postgres-data:/var/lib/postgresql 
+  pgadmin:
+    image: dpage/pgadmin4:9.18
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@local.dev
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGPASS_FILE: /pgadmin4/pgpass
 
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_REPLACE_SERVERS_ON_STARTUP: "True"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - 8080:80
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+      - ./pgadmin/pgpass:/pgadmin4/pgpass:ro
+    depends_on:
+      - postgres
 volumes:
   postgres-data: 
-
+  pgadmin-data:
 
