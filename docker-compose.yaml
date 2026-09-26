@@ -1,0 +1,19 @@
+services:
+  api:
+    image: html-analyzer:latest
+    build: 
+      context: .
+      dockerfile: docker/api/Dockerfile 
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8080
+
+      ConnectionStrings__Db: Host=postgres;Port=5432;Database=html_analyzer_db;Username=postgres;Password=postgres
+    ports: 
+      - 8090:8080
+
+
+
