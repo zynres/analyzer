@@ -9,7 +9,7 @@ public static class DbInitializer
     {
         using var connection = new NpgsqlConnection(configuration.GetConnectionString("Db"));
 
-        connection.OpenAsync();
+        connection.Open();
 
         CreateElementsTable(connection);
     }
