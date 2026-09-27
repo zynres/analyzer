@@ -13,22 +13,41 @@ public sealed class ElementRepository
         connectionString = configuration.GetConnectionString("Db")!;
     }
 
-    public async Task InsertAsync(Element element)
+    public async Task<bool> InsertManyAsync(List<string> elementsAttribute, List<string> htmls)
     {
         await using var connection =
             new NpgsqlConnection(connectionString);
 
         await connection.OpenAsync();
 
-        await connection.ExecuteAsync(
-            """
-            INSERT INTO elements (attribute_value, html)
-            VALUES (@AttributeValue, @Html)
-            """,
-            new
+        var transaction = await connection.BeginTransactionAsync();
+
+        try
+        {
+            for (int i = 0; i < elementsAttribute.Count; i++)
             {
-                element.AttributeValue,
-                element.Html
-            });
+                await connection.ExecuteAsync(
+                        """
+                    INSERT INTO elements (attribute_value, html)
+                    VALUES (@AttributeValue, @Html)
+                    """,
+                        new
+                        {
+                            AttributeValue = elementsAttribute[i],
+                            Html = htmls[i]
+                        },
+                        transaction);
+            }
+
+            await transaction.CommitAsync();
+
+            return true;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+
+            return false;
+        }
     }
 }
