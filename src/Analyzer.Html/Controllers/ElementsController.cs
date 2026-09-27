@@ -1,7 +1,6 @@
-using Analyzer.Html.Models.Common;
 using Analyzer.Html.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using FluentValidation;
+using Analyzer.Html.Services;
 
 namespace Analyzer.Html.Controllers;
 
@@ -9,33 +8,18 @@ namespace Analyzer.Html.Controllers;
 [Route("api/[controller]")]
 public class ElementsController : ControllerBase
 {
-    public IValidator<PostElementRequest> validator;
+    private readonly ElementProcessingService elementProcessing;
 
-    public ElementsController(IValidator<PostElementRequest> validator)
+    public ElementsController(ElementProcessingService elementProcessing)
     {
-        this.validator = validator;
+        this.elementProcessing = elementProcessing;
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateElement(PostElementRequest request)
+    public async Task<ActionResult<PostElementResponse>> CreateElement(PostElementRequest request)
     {
-        var result = await validator.ValidateAsync(request);
-        
-        var response = new PostElementResponse();
+        (int statusCode, PostElementResponse response) = await elementProcessing.ProcessAsync(request);
 
-        if (!result.IsValid)
-        {
-            var error = result.Errors[0];
-
-            response.IsError = 1;
-            response.ErrorCode = error.ErrorCode;
-            response.ErrorMessage = error.ErrorMessage;
-
-            return BadRequest(response);
-        }
-
-        response.ErrorCode = ErrorCodeType.NONE.ToString();
-
-        return Created();
+        return StatusCode(statusCode, response);
     }
 }

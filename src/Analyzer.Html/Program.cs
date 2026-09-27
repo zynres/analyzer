@@ -1,5 +1,6 @@
-using Analyzer.Html.Services;
+using Analyzer.Html.Services.Repositories;
 using Analyzer.Html.Services.Validators;
+using Analyzer.Html.Services;
 using FluentValidation;
 
 public class Program
@@ -15,23 +16,24 @@ public class Program
 
         builder.Services.AddControllers();
 
+        builder.Services.AddSingleton<EmailExtractorService>();
+        builder.Services.AddSingleton<ElementParserService>();
+        builder.Services.AddSingleton<HtmlParserService>();
+        builder.Services.AddSingleton<AesService>();
+
+        builder.Services.AddScoped<ElementProcessingService>();
+        builder.Services.AddScoped<ElementRepository>();
+
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
+        app.MapSwagger();
+        app.MapSwaggerUI(setupAction: setup =>
         {
-            app.MapSwagger();
-            app.MapSwaggerUI(setupAction: setup =>
-            {
-                setup.RoutePrefix = "api/swagger";
-                setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Analyzer");
-            });
+            setup.RoutePrefix = "api/swagger";
+            setup.SwaggerEndpoint("/swagger/v1/swagger.json", "Analyzer");
+        });
 
-            DbInitializer.Initialize(app.Configuration);
-        }
-        else
-        {
-            app.UseHttpsRedirection();
-        }
+        DbInitializer.Initialize(app.Configuration);
 
         app.MapControllers();
 
