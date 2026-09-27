@@ -1,0 +1,27 @@
+{
+  "is_error": 0,
+  "error_code": "NONE",
+  "error_message": ".",
+  "elements_count": 9,
+  "emails_count": 5,
+  "url": "https://test.com/page123",
+  "decrypted_plain_text": "AES Error: Object reference not set to an instance of an object.",
+  "elements_attr_list": [
+    "//s.rbk.ru/v10_rbcnews_static/common/common-10.9.94/scripts/vendor/jquery/jquery-3.5.1.min.js",
+    "//s.rbk.ru/v10_rbcnews_static/common/common-10.9.94/scripts/build/_core.js",
+    "//s.rbk.ru/v2_rbcbanners_static/rbcbanners-2.1.34/fox/build/app.js",
+    "//s.rbk.ru/v2_paywall_static/paywall-2.1.144/scripts/build/_paywall.js",
+    "//s.rbk.ru/v10_rbcnews_static/common/common-10.9.94/scripts/build/_common.js",
+    "//s.rbk.ru/v10_rbcnews_static/common/common-10.9.94/scripts/build/_main.js",
+    "//s.rbk.ru/v10_rbcnews_static/rbcnews-10.5.62/scripts/build/_main.js",
+    "//s.rbk.ru/v10_rbcnews_static/rbcnews-10.5.62/scripts/build/_index.js",
+    "//s.rbk.ru/v10_rbcnews_static/info-service/1.4.11/build/_core.js"
+  ],
+  "emails_list": [
+    "webmaster@rbc.ru",
+    "privet@test.com",
+    "hh_test_task@gmail.com",
+    "letters@rbc.ru",
+    "letters@rbc.ru"
+  ]
+}
