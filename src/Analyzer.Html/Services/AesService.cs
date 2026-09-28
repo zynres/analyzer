@@ -27,14 +27,14 @@ public sealed class AesService
         {
             using Aes aes = Aes.Create();
 
-            aes.Key = keyBytes.ToArray();
+            aes.Key = keyBytes;
             aes.Mode = CipherMode.ECB;
             aes.Padding = PaddingMode.None;
 
             using ICryptoTransform decryptor = aes.CreateDecryptor();
 
             ReadOnlySpan<byte> plaintext = decryptor.TransformFinalBlock(
-                encryptedBytes.ToArray(),
+                encryptedBytes,
                 0,
                 encryptedBytes.Length);
 
